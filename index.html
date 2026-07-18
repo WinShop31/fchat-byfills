@@ -16,91 +16,30 @@
             --out-msg: #ffffff;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: var(--tg-bg); color: var(--tg-text); height: 100vh; width: 100vw; overflow: hidden; }
         
-        body { 
-            background-color: var(--tg-bg); 
-            color: var(--tg-text); 
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-        }
+        .screen { display: none !important; width: 100%; height: 100%; }
+        .screen.active { display: flex !important; flex-direction: column; }
         
-        /* Жесткое скрытие неактивных экранов */
-        .screen { 
-            display: none !important; 
-            width: 100%; 
-            height: 100%; 
-        }
-        .screen.active { 
-            display: flex !important; 
-            flex-direction: column;
-        }
-        
-        /* Экраны авторизации */
-        .auth-screen {
-            background: white;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .auth-container { 
-            width: 100%; 
-            max-width: 360px; 
-            text-align: center; 
-        }
+        .auth-screen { background: white; justify-content: center; align-items: center; padding: 20px; }
+        .auth-container { width: 100%; max-width: 360px; text-align: center; }
         .logo { font-size: 32px; font-weight: 700; color: var(--tg-blue); margin-bottom: 10px; }
         .subtitle { color: var(--tg-gray); font-size: 14px; margin-bottom: 24px; }
         
         .input-group { margin-bottom: 14px; }
-        input, textarea { 
-            width: 100%; 
-            padding: 14px 16px; 
-            border: 1px solid var(--tg-border); 
-            border-radius: 10px; 
-            font-size: 16px; 
-            outline: none; 
-            background: #f9fafb; 
-            transition: border 0.2s;
-        }
+        input { width: 100%; padding: 14px 16px; border: 1px solid var(--tg-border); border-radius: 10px; font-size: 16px; outline: none; background: #f9fafb; }
         input:focus { border-color: var(--tg-blue); background: white; }
         
-        button { 
-            width: 100%; 
-            padding: 14px; 
-            background-color: var(--tg-blue); 
-            color: white; 
-            border: none; 
-            border-radius: 10px; 
-            font-size: 16px; 
-            font-weight: 600; 
-            cursor: pointer; 
-        }
+        button { width: 100%; padding: 14px; background-color: var(--tg-blue); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; }
         button:active { background-color: var(--tg-blue-hover); }
         .link-btn { background: none; color: var(--tg-blue); font-size: 14px; margin-top: 16px; width: auto; }
-        .error-msg { color: #e53935; font-size: 13px; margin-top: 6px; display: none; text-align: left; }
+        .error-msg { color: #e53935; font-size: 13px; margin-top: 6px; display: none; text-align: center; font-weight: 500; }
 
-        /* ГЛАВНЫЙ ИНТЕРФЕЙС МЕССЕНДЖЕРА */
-        .header-bar {
-            height: 56px;
-            background: white;
-            border-bottom: 1px solid var(--tg-border);
-            display: flex;
-            align-items: center;
-            padding: 0 16px;
-            gap: 12px;
-            flex-shrink: 0;
-        }
-        .header-title { font-size: 18px; font-weight: 600; flex: 1; }
-        
-        .logout-icon {
-            color: var(--tg-gray);
-            font-size: 20px;
-            background: none;
-            width: auto; padding: 0;
-        }
+        .header-bar { height: 56px; background: white; border-bottom: 1px solid var(--tg-border); display: flex; align-items: center; padding: 0 16px; gap: 12px; flex-shrink: 0; }
+        .header-title { font-size: 18px; font-weight: 600; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .logout-icon { color: var(--tg-gray); font-size: 16px; background: none; width: auto; padding: 0; font-weight: normal; }
 
-        /* Список чатов */
         .search-box { padding: 8px 16px; background: white; flex-shrink: 0; }
         .search-box input { padding: 8px 16px; font-size: 14px; border-radius: 20px; }
         
@@ -113,45 +52,15 @@
         .chat-info h4 { font-size: 16px; font-weight: 600; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .chat-info p { font-size: 13px; color: var(--tg-gray); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* ОКНО ОДИНОЧНОГО ЧАТА (Всплывает поверх на мобилках) */
-        #screen-chat-window {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: #f4f5f7;
-            z-index: 10;
-        }
-        .back-btn { background: none; color: var(--tg-blue); width: auto; padding: 8px 4px; font-size: 20px; font-weight: bold; margin: 0;}
+        #screen-chat-window { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f4f5f7; z-index: 10; }
+        .back-btn { background: none; color: var(--tg-blue); width: auto; padding: 8px 4px; font-size: 20px; font-weight: bold; margin: 0; }
         
-        .message-container { 
-            flex: 1; 
-            padding: 16px; 
-            overflow-y: auto; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 8px; 
-        }
-        .msg-bubble { 
-            max-width: 75%; 
-            padding: 8px 14px; 
-            border-radius: 16px; 
-            font-size: 15px; 
-            word-break: break-word; 
-            line-height: 1.4; 
-            box-shadow: 0 1px 2px rgba(0,0,0,0.07);
-        }
+        .message-container { flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+        .msg-bubble { max-width: 75%; padding: 8px 14px; border-radius: 16px; font-size: 15px; word-break: break-word; line-height: 1.4; box-shadow: 0 1px 2px rgba(0,0,0,0.07); }
         .msg-bubble.incoming { background: var(--out-msg); align-self: flex-start; border-top-left-radius: 4px; }
         .msg-bubble.outgoing { background: var(--my-msg); align-self: flex-end; border-top-right-radius: 4px; }
         
-        .msg-input-area { 
-            padding: 8px 12px; 
-            background: white; 
-            display: flex; 
-            gap: 8px; 
-            align-items: center; 
-            border-top: 1px solid var(--tg-border);
-            padding-bottom: calc(8px + env(safe-area-inset-bottom)); /* Для айфонов с челкой */
-        }
+        .msg-input-area { padding: 8px 12px; background: white; display: flex; gap: 8px; align-items: center; border-top: 1px solid var(--tg-border); padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
         .msg-input-area input { border-radius: 20px; padding: 10px 16px; font-size: 15px; }
         .msg-input-area button { width: 40px; height: 40px; border-radius: 50%; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
     </style>
@@ -195,14 +104,14 @@
             <div class="subtitle">Придумайте никнейм</div>
             <div class="input-group"><input type="text" id="setup-name" placeholder="Ваше имя"></div>
             <div class="input-group">
-                <input type="text" id="setup-username" placeholder="Юзернейм (например: tg_user)">
+                <input type="text" id="setup-username" placeholder="Юзернейм (например: user123)">
                 <div id="setup-error" class="error-msg"></div>
             </div>
             <button onclick="handleSetupProfile()">Сохранить</button>
         </div>
     </div>
 
-    <!-- ГЛАВНЫЙ ЭКРАН: СПИСОК ЧАТОВ -->
+    <!-- ГЛАВНЫЙ ЭКРАН -->
     <div id="screen-main" class="screen">
         <div class="header-bar">
             <div class="header-title">Чаты</div>
@@ -211,23 +120,17 @@
         <div class="search-box">
             <input type="text" id="searchBar" placeholder="Поиск по @username..." oninput="searchUsers()">
         </div>
-        <div id="chatList" class="chat-list">
-            <!-- Сюда прилетят чаты -->
-        </div>
+        <div id="chatList" class="chat-list"></div>
     </div>
 
-    <!-- ОТДЕЛЬНЫЙ ЭКРАН ДЛЯ ПЕРЕПИСКИ -->
+    <!-- ОКНО ЧАТА -->
     <div id="screen-chat-window" class="screen">
         <div class="header-bar">
             <button class="back-btn" onclick="closeChat()">←</button>
             <div id="active-avatar" class="avatar" style="width:36px; height:36px; font-size:14px; margin-right:4px;"></div>
-            <div class="header-title" id="active-chat-title" style="font-size:16px;">Чат</div>
+            <div class="header-title" id="active-chat-title">Чат</div>
         </div>
-        
-        <div id="messageContainer" class="message-container">
-            <!-- Сообщения -->
-        </div>
-        
+        <div id="messageContainer" class="message-container"></div>
         <div class="msg-input-area">
             <input type="text" id="messageInput" placeholder="Сообщение..." onkeypress="if(event.key==='Enter') sendMessage()">
             <button onclick="sendMessage()">➔</button>
@@ -248,41 +151,67 @@
 
     function showError(elementId, text) {
         const errEl = document.getElementById(elementId);
-        errEl.innerText = text; errEl.style.display = 'block';
+        if (errEl) { errEl.innerText = text; errEl.style.display = 'block'; }
+    }
+
+    function hideErrors() {
+        document.querySelectorAll('.error-msg').forEach(e => e.style.display = 'none');
     }
 
     async function handleRegister() {
-        const email = document.getElementById('reg-email').value;
+        hideErrors();
+        const email = document.getElementById('reg-email').value.trim();
         const password = document.getElementById('reg-password').value;
+        if(!email || !password) { showError('reg-error', 'Заполните все поля'); return; }
+        
         try {
-            const res = await fetch(`${API_URL}/auth/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) });
+            const res = await fetch(`${API_URL}/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
             const data = await res.json();
-            if (!res.ok) throw new Error(data.detail);
+            if (!res.ok) throw new Error(data.detail || 'Ошибка регистрации');
             localStorage.setItem('f_token', data.token);
             switchScreen('screen-setup');
         } catch (err) { showError('reg-error', err.message); }
     }
 
     async function handleLogin() {
-        const email = document.getElementById('login-email').value;
+        hideErrors();
+        const email = document.getElementById('login-email').value.trim();
         const password = document.getElementById('login-password').value;
+        if(!email || !password) { showError('login-error', 'Заполните все поля'); return; }
+
         try {
-            const res = await fetch(`${API_URL}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) });
+            const res = await fetch(`${API_URL}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
             const data = await res.json();
-            if (!res.ok) throw new Error(data.detail);
+            if (!res.ok) throw new Error(data.detail || 'Неверные данные');
             localStorage.setItem('f_token', data.token);
-            checkAuth();
+            await checkAuth();
         } catch (err) { showError('login-error', err.message); }
     }
 
     async function handleSetupProfile() {
+        hideErrors();
         const token = localStorage.getItem('f_token');
-        const display_name = document.getElementById('setup-name').value;
-        const username = document.getElementById('setup-username').value;
+        const display_name = document.getElementById('setup-name').value.trim();
+        const username = document.getElementById('setup-username').value.trim();
+        if(!display_name || !username) { showError('setup-error', 'Заполните все поля'); return; }
+
         try {
-            const res = await fetch(`${API_URL}/profile/setup`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': token }, body: JSON.stringify({ username, display_name }) });
-            if (!res.ok) { const d = await res.json(); throw new Error(d.detail); }
-            checkAuth();
+            const res = await fetch(`${API_URL}/profile/setup`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': token },
+                body: JSON.stringify({ username, display_name })
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.detail || 'Ошибка сохранения');
+            await checkAuth();
         } catch (err) { showError('setup-error', err.message); }
     }
 
@@ -290,60 +219,69 @@
         const token = localStorage.getItem('f_token');
         if (!token) { switchScreen('screen-login'); return; }
         try {
-            const res = await fetch(`${API_URL}/profile/me`, { headers: { 'Authorization': token } });
+            const res = await fetch(`${API_URL}/profile/me`, {
+                headers: { 'Authorization': token }
+            });
+            if (res.status === 401) { handleLogout(); return; }
             const data = await res.json();
-            if (!res.ok || res.status === 401) { handleLogout(); return; }
-            if (!data.has_profile) { switchScreen('screen-setup'); } 
-            else {
+            if (!data.has_profile) { 
+                switchScreen('screen-setup'); 
+            } else {
                 myUsername = data.profile.username;
                 switchScreen('screen-main');
                 loadChats();
             }
-        } catch { switchScreen('screen-login'); }
+        } catch (e) { switchScreen('screen-login'); }
     }
 
     async function searchUsers() {
         const query = document.getElementById('searchBar').value.trim();
         if (!query) { loadChats(); return; }
         const token = localStorage.getItem('f_token');
-        const res = await fetch(`${API_URL}/users/search?q=${query}`, { headers: { 'Authorization': token } });
-        const users = await res.json();
-        
-        const list = document.getElementById('chatList');
-        list.innerHTML = '';
-        users.forEach(u => {
-            list.innerHTML += `
-                <div class="chat-item" onclick="openChat('${u.username}', '${u.display_name}', '${u.avatar_color}')">
-                    <div class="avatar" style="background:${u.avatar_color}">${u.display_name.charAt(0)}</div>
-                    <div class="chat-info">
-                        <h4>${u.display_name}</h4>
-                        <p>@${u.username}</p>
-                    </div>
-                </div>`;
-        });
+        try {
+            const res = await fetch(`${API_URL}/users/search?q=${encodeURIComponent(query)}`, {
+                headers: { 'Authorization': token }
+            });
+            const users = await res.json();
+            const list = document.getElementById('chatList');
+            list.innerHTML = '';
+            users.forEach(u => {
+                list.innerHTML += `
+                    <div class="chat-item" onclick="openChat('${u.username}', '${u.display_name}', '${u.avatar_color}')">
+                        <div class="avatar" style="background:${u.avatar_color}">${u.display_name.charAt(0)}</div>
+                        <div class="chat-info">
+                            <h4>${u.display_name}</h4>
+                            <p>@${u.username}</p>
+                        </div>
+                    </div>`;
+            });
+        } catch(e) {}
     }
 
     async function loadChats() {
-        if (document.getElementById('searchBar').value.trim()) return;
+        const searchInput = document.getElementById('searchBar');
+        if (searchInput && searchInput.value.trim()) return;
         const token = localStorage.getItem('f_token');
-        const res = await fetch(`${API_URL}/chats`, { headers: { 'Authorization': token } });
-        const chats = await res.json();
-        
-        const list = document.getElementById('chatList');
-        list.innerHTML = '';
-        if(chats.length === 0) {
-            list.innerHTML = '<div style="padding: 20px; color: var(--tg-gray); text-align:center; font-size:14px;">Никто ещё не найден. Введите юзернейм в поиск!</div>';
-        }
-        chats.forEach(c => {
-            list.innerHTML += `
-                <div class="chat-item" onclick="openChat('${c.username}', '${c.display_name}', '${c.avatar_color}')">
-                    <div class="avatar" style="background:${c.avatar_color}">${c.display_name.charAt(0)}</div>
-                    <div class="chat-info">
-                        <h4>${c.display_name}</h4>
-                        <p>Перейти к диалогу</p>
-                    </div>
-                </div>`;
-        });
+        try {
+            const res = await fetch(`${API_URL}/chats`, { headers: { 'Authorization': token } });
+            const chats = await res.json();
+            const list = document.getElementById('chatList');
+            list.innerHTML = '';
+            if(chats.length === 0) {
+                list.innerHTML = '<div style="padding: 24px; color: var(--tg-gray); text-align:center; font-size:14px;">Введите юзернейм в поиск, чтобы начать общение</div>';
+                return;
+            }
+            chats.forEach(c => {
+                list.innerHTML += `
+                    <div class="chat-item" onclick="openChat('${c.username}', '${c.display_name}', '${c.avatar_color}')">
+                        <div class="avatar" style="background:${c.avatar_color}">${c.display_name.charAt(0)}</div>
+                        <div class="chat-info">
+                            <h4>${c.display_name}</h4>
+                            <p>Открыть переписку</p>
+                        </div>
+                    </div>`;
+            });
+        } catch(e) {}
     }
 
     function openChat(username, displayName, avatarColor) {
@@ -353,7 +291,6 @@
         activeAv.style.background = avatarColor;
         activeAv.innerText = displayName.charAt(0);
         
-        // Открываем экран чата
         document.getElementById('screen-chat-window').classList.add('active');
         
         loadMessages();
@@ -365,26 +302,26 @@
         currentChatUser = null;
         clearInterval(chatInterval);
         document.getElementById('screen-chat-window').classList.remove('active');
-        document.getElementById('messageContainer').innerHTML = '';
         loadChats();
     }
 
     async function loadMessages() {
         if (!currentChatUser) return;
         const token = localStorage.getItem('f_token');
-        const res = await fetch(`${API_URL}/messages/${currentChatUser}`, { headers: { 'Authorization': token } });
-        const messages = await res.json();
-        
-        const container = document.getElementById('messageContainer');
-        const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 120;
-        
-        container.innerHTML = '';
-        messages.forEach(m => {
-            const side = m.sender_username === myUsername ? 'outgoing' : 'incoming';
-            container.innerHTML += `<div class="msg-bubble ${side}">${m.text}</div>`;
-        });
+        try {
+            const res = await fetch(`${API_URL}/messages/${currentChatUser}`, { headers: { 'Authorization': token } });
+            const messages = await res.json();
+            const container = document.getElementById('messageContainer');
+            const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 120;
+            
+            container.innerHTML = '';
+            messages.forEach(m => {
+                const side = m.sender_username === myUsername ? 'outgoing' : 'incoming';
+                container.innerHTML += `<div class="msg-bubble ${side}">${m.text}</div>`;
+            });
 
-        if (isAtBottom) container.scrollTop = container.scrollHeight;
+            if (isAtBottom) container.scrollTop = container.scrollHeight;
+        } catch(e) {}
     }
 
     async function sendMessage() {
@@ -395,13 +332,14 @@
         const token = localStorage.getItem('f_token');
         input.value = '';
         
-        await fetch(`${API_URL}/messages/send`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': token },
-            body: JSON.stringify({ receiver_username: currentChatUser, text: text })
-        });
-        
-        loadMessages();
+        try {
+            await fetch(`${API_URL}/messages/send`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': token },
+                body: JSON.stringify({ receiver_username: currentChatUser, text: text })
+            });
+            loadMessages();
+        } catch(e) {}
     }
 
     function handleLogout() {
